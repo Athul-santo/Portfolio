@@ -45,7 +45,7 @@ const technologies = [
 function TechStack() {
   return (
     <section id="tech-stack" className="border-t border-white/10 bg-slate-900/40">
-      <div className="mx-auto max-w-6xl px-6 py-20 sm:py-24">
+      <div className="px-6 py-20 sm:py-24">
         {/* Section heading */}
         <div className="mb-12">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">

@@ -1,14 +1,83 @@
 
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
+const codeLines = [
+  [
+    { text: 'const ', className: 'text-fuchsia-400' },
+    { text: 'developer', className: 'text-cyan-300' },
+    { text: ' = {', className: '' },
+  ],
+  [
+    { text: '  name: ', className: 'text-slate-400' },
+    { text: "'Athul Santo'", className: 'text-emerald-300' },
+    { text: ',', className: '' },
+  ],
+  [
+    { text: '  role: ', className: 'text-slate-400' },
+    { text: "'Full Stack Developer'", className: 'text-emerald-300' },
+    { text: ',', className: '' },
+  ],
+  [
+    { text: '  stack: ', className: 'text-slate-400' },
+    { text: '[', className: '' },
+  ],
+  [
+    { text: "    'React', 'Node.js',", className: 'text-emerald-300' },
+  ],
+  [
+    { text: "    'Express', 'MongoDB'", className: 'text-emerald-300' },
+  ],
+  [
+    { text: '  ],', className: '' },
+  ],
+  [
+    { text: '  mindset: ', className: 'text-slate-400' },
+    { text: "'Always learning'", className: 'text-emerald-300' },
+  ],
+  [
+    { text: '}', className: '' },
+  ],
+]
+
+const getLineLength = (line) =>
+  line.reduce((sum, token) => sum + token.text.length, 0)
+
+const totalChars = codeLines.reduce((sum, line) => sum + getLineLength(line), 0)
+
+let offset = 0
+const lineOffsets = codeLines.map((line) => {
+  const start = offset
+  offset += getLineLength(line)
+  return start
+})
+
 function Hero() {
+  const [typingStarted, setTypingStarted] = useState(false)
+  const [typedChars, setTypedChars] = useState(0)
+
+  useEffect(() => {
+    const startTimer = setTimeout(() => setTypingStarted(true), 2200)
+    return () => clearTimeout(startTimer)
+  }, [])
+
+  useEffect(() => {
+    if (!typingStarted || typedChars >= totalChars) return
+
+    const typeTimer = setTimeout(() => {
+      setTypedChars((count) => count + 1)
+    }, 18)
+
+    return () => clearTimeout(typeTimer)
+  }, [typingStarted, typedChars])
+
   return (
     <section className="relative isolate overflow-hidden">
       {/* Background effects */}
       <div className="pointer-events-none absolute -right-40 -top-20 -z-10 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-20 -left-40 -z-10 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl" />
 
-      <div className="mx-auto grid max-w-6xl items-center gap-14 px-6 py-24 md:grid-cols-2 md:py-32">
+      <div className="grid items-center gap-14 px-6 py-24 md:grid-cols-2 md:py-32">
         {/* Introduction */}
         <div>
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-sm text-emerald-300">
@@ -90,36 +159,40 @@ function Hero() {
             </div>
 
             {/* Code content */}
-            <div className="overflow-x-auto font-mono text-sm leading-8 sm:text-base">
-              <p>
-                <span className="text-fuchsia-400">const</span>{' '}
-                <span className="text-cyan-300">developer</span> = {'{'}
-              </p>
+            <div className="min-h-[288px] overflow-x-auto font-mono text-sm leading-8 sm:text-base">
+              {codeLines.map((line, lineIndex) => {
+                const lineStart = lineOffsets[lineIndex]
+                const lineLength = getLineLength(line)
+                const visibleChars = Math.max(
+                  0,
+                  Math.min(lineLength, typedChars - lineStart),
+                )
+                const isActive =
+                  typedChars >= lineStart && typedChars < lineStart + lineLength
 
-              <p className="pl-5">
-                <span className="text-slate-400">name:</span>{' '}
-                <span className="text-emerald-300">'Athul Santo'</span>,
-              </p>
+                let remaining = visibleChars
 
-              <p className="pl-5">
-                <span className="text-slate-400">role:</span>{' '}
-                <span className="text-emerald-300">'Full Stack Developer'</span>,
-              </p>
+                return (
+                  <p key={lineIndex} className="whitespace-pre">
+                    {line.map((token, tokenIndex) => {
+                      if (remaining <= 0) return null
 
-              <p className="pl-5">
-                <span className="text-slate-400">stack:</span> [
-              </p>
+                      const visibleText = token.text.slice(0, remaining)
+                      remaining -= visibleText.length
 
-              <p className="pl-10 text-emerald-300">'React', 'Node.js',</p>
-              <p className="pl-10 text-emerald-300">'Express', 'MongoDB'</p>
-              <p className="pl-5">],</p>
+                      return (
+                        <span key={tokenIndex} className={token.className}>
+                          {visibleText}
+                        </span>
+                      )
+                    })}
 
-              <p className="pl-5">
-                <span className="text-slate-400">mindset:</span>{' '}
-                <span className="text-emerald-300">'Always learning'</span>
-              </p>
-
-              <p>{'}'}</p>
+                    {isActive && (
+                      <span className="ml-0.5 inline-block h-5 w-0.5 animate-pulse rounded-full bg-cyan-400 align-middle" />
+                    )}
+                  </p>
+                )
+              })}
             </div>
 
             <div className="mt-7 rounded-xl border border-cyan-400/10 bg-cyan-400/5 p-4">
