@@ -1,9 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProfileMenu from "./ProfileMenu";
 import ThemeMenu from "./ThemeMenu";
+import { initialTheme, THEME_STORAGE_KEY } from "../theme";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState(initialTheme);
+
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+
+    try {
+      localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } catch {
+      // Storage can be unavailable in private browsing.
+    }
+  }, [theme]);
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -41,18 +53,18 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
+
+          {/* Theme menu sits after Contact */}
+          <ThemeMenu theme={theme} onSelect={setTheme} />
         </div>
 
-        {/* Theme control + profile */}
-        <div className="flex items-center gap-2">
-          <ThemeMenu />
-          <ProfileMenu />
-        </div>
+        {/* Profile */}
+        <ProfileMenu />
       </div>
 
       {/* Mobile Navigation */}
       {menuOpen && (
-        <div className="border-t border-base-content/10 bg-base-100 px-6 py-5 md:hidden">
+        <div className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-base-content/10 bg-base-100 px-6 py-5 md:hidden">
           <div className="flex flex-col gap-5">
             {navLinks.map((link) => (
               <a
@@ -64,6 +76,12 @@ export default function Navbar() {
                 {link.name}
               </a>
             ))}
+
+            <ThemeMenu
+              variant="mobile"
+              theme={theme}
+              onSelect={setTheme}
+            />
           </div>
         </div>
       )}

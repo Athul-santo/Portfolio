@@ -1,24 +1,83 @@
 import { useEffect, useRef, useState } from 'react'
-import { initialTheme, THEMES, THEME_STORAGE_KEY } from '../theme'
+import { THEMES } from '../theme'
 
-function ThemeMenu() {
-  const [theme, setTheme] = useState(initialTheme)
+function CheckIcon({ className = '' }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="2"
+      stroke="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+    </svg>
+  )
+}
+
+function ChevronIcon({ className = '' }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      strokeWidth="1.8"
+      stroke="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path strokeLinecap="round" strokeLinejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
+    </svg>
+  )
+}
+
+function ThemeGrid({ theme, onSelect }) {
+  return (
+    <div role="group" aria-label="Color themes" className="grid grid-cols-2 gap-1.5">
+      {THEMES.map((option) => {
+        const isActive = option.name === theme
+
+        return (
+          <button
+            key={option.name}
+            type="button"
+            onClick={() => onSelect(option.name)}
+            aria-pressed={isActive}
+            className={`flex min-w-0 items-center gap-2 rounded-lg border px-2.5 py-2 text-left text-xs transition ${
+              isActive
+                ? 'border-primary/30 bg-primary/15 font-medium text-primary'
+                : 'border-base-content/10 bg-base-100/50 text-base-content/70 hover:border-primary/30 hover:bg-base-content/10 hover:text-base-content'
+            }`}
+          >
+            <span
+              data-theme={option.name}
+              aria-hidden="true"
+              className="flex shrink-0 items-center gap-0.5 rounded-full border border-base-content/10 bg-base-100 px-1 py-0.5"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+              <span className="h-1.5 w-1.5 rounded-full bg-secondary" />
+              <span className="h-1.5 w-1.5 rounded-full bg-accent" />
+            </span>
+
+            <span className="min-w-0 flex-1 truncate">{option.label}</span>
+
+            {isActive && <CheckIcon className="h-3.5 w-3.5 shrink-0" />}
+          </button>
+        )
+      })}
+    </div>
+  )
+}
+
+function ThemeMenu({ theme, onSelect, variant = 'desktop' }) {
   const [open, setOpen] = useState(false)
   const containerRef = useRef(null)
   const triggerRef = useRef(null)
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-
-    try {
-      localStorage.setItem(THEME_STORAGE_KEY, theme)
-    } catch {
-      // Storage can be unavailable in private browsing.
-    }
-  }, [theme])
-
-  useEffect(() => {
-    if (!open) return undefined
+    if (variant !== 'desktop' || !open) return undefined
 
     const handlePointerDown = (event) => {
       if (!containerRef.current?.contains(event.target)) {
@@ -40,7 +99,42 @@ function ThemeMenu() {
       document.removeEventListener('pointerdown', handlePointerDown)
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [open])
+  }, [open, variant])
+
+  const handleSelect = (name) => {
+    onSelect(name)
+
+    if (variant === 'desktop') {
+      setOpen(false)
+    }
+  }
+
+  if (variant === 'mobile') {
+    return (
+      <div>
+        <button
+          type="button"
+          onClick={() => setOpen((value) => !value)}
+          aria-expanded={open}
+          aria-controls="theme-menu-mobile"
+          className={`flex w-full items-center justify-between transition ${
+            open ? 'text-primary' : 'text-base-content/75 hover:text-primary'
+          }`}
+        >
+          <span>ThemeMenu</span>
+          <ChevronIcon
+            className={`h-4 w-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+          />
+        </button>
+
+        {open && (
+          <div id="theme-menu-mobile" className="pt-3">
+            <ThemeGrid theme={theme} onSelect={handleSelect} />
+          </div>
+        )}
+      </div>
+    )
+  }
 
   return (
     <div ref={containerRef} className="relative">
@@ -48,80 +142,31 @@ function ThemeMenu() {
         ref={triggerRef}
         type="button"
         onClick={() => setOpen((value) => !value)}
-        aria-label="Change color theme"
-        aria-haspopup="menu"
         aria-expanded={open}
-        title="Change theme"
-        className="btn btn-ghost btn-circle btn-sm border border-base-content/10 bg-base-200/60 text-base-content/70 hover:border-primary/40 hover:bg-base-200 hover:text-primary"
+        aria-haspopup="dialog"
+        aria-controls="theme-menu-desktop"
+        className={`flex items-center gap-1.5 transition-colors duration-200 ${
+          open ? 'text-primary' : 'text-base-content/60 hover:text-primary'
+        }`}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="h-5 w-5"
-          aria-hidden="true"
-        >
-          <path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10c1.38 0 2.5-1.12 2.5-2.5 0-.61-.23-1.2-.64-1.67a.55.55 0 0 1-.13-.33c0-.28.22-.5.5-.5H16c3.31 0 6-2.69 6-6 0-3.87-4.49-7-10-7ZM6.5 11a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Zm3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3Z" />
-        </svg>
+        ThemeMenu
+        <ChevronIcon
+          className={`h-3 w-3 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
+        />
       </button>
 
       {open && (
-        <div className="absolute right-0 top-full z-50 mt-3 w-56 rounded-box border border-base-content/10 bg-base-200 p-2 shadow-2xl">
-          <p className="px-3 pb-2 pt-1 text-xs font-semibold uppercase tracking-[0.2em] text-base-content/50">
-            Theme
+        <div
+          id="theme-menu-desktop"
+          role="dialog"
+          aria-label="Choose a theme"
+          className="absolute left-0 top-full z-50 mt-7 w-80 rounded-box border border-base-content/10 bg-base-200 p-3 shadow-2xl"
+        >
+          <p className="px-1 pb-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-base-content/50">
+            Choose theme
           </p>
 
-          <ul role="menu" className="menu menu-sm w-full p-0">
-            {THEMES.map((option) => {
-              const isActive = option.name === theme
-
-              return (
-                <li key={option.name} role="none">
-                  <button
-                    type="button"
-                    role="menuitemradio"
-                    aria-checked={isActive}
-                    onClick={() => {
-                      setTheme(option.name)
-                      setOpen(false)
-                    }}
-                    className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm ${
-                      isActive
-                        ? 'bg-primary/15 text-primary'
-                        : 'text-base-content/70 hover:bg-base-content/10 hover:text-base-content'
-                    }`}
-                  >
-                    <span
-                      data-theme={option.name}
-                      className="flex shrink-0 items-center gap-1 rounded-full border border-base-content/10 bg-base-100 px-1.5 py-1"
-                    >
-                      <span className="h-2.5 w-2.5 rounded-full bg-primary" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-secondary" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-accent" />
-                    </span>
-
-                    <span className="flex-1 text-left">{option.label}</span>
-
-                    {isActive && (
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 20 20"
-                        fill="currentColor"
-                        className="h-4 w-4"
-                        aria-hidden="true"
-                      >
-                        <path
-                          fillRule="evenodd"
-                          d="M16.7 5.3a1 1 0 0 1 0 1.4l-7.5 7.5a1 1 0 0 1-1.4 0L3.3 9.7a1 1 0 1 1 1.4-1.4l3.8 3.8 6.8-6.8a1 1 0 0 1 1.4 0Z"
-                          clipRule="evenodd"
-                        />
-                      </svg>
-                    )}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
+          <ThemeGrid theme={theme} onSelect={handleSelect} />
         </div>
       )}
     </div>
