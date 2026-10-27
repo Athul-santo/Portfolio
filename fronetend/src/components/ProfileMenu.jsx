@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import profileImage from '../assets/profile.jpg'
-import { EMAIL, EMAIL_URL } from '../contact'
+import { EMAIL } from '../contact'
 
 const quickLinks = [
   { label: 'About', href: '#about' },
@@ -8,23 +8,80 @@ const quickLinks = [
   { label: 'Back to top', href: '#home' },
 ]
 
+async function copyToClipboard(text) {
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(text)
+      return true
+    } catch {
+      // Fall back to the older clipboard API.
+    }
+  }
+
+  const textarea = document.createElement('textarea')
+  textarea.value = text
+  textarea.setAttribute('readonly', '')
+  textarea.style.position = 'fixed'
+  textarea.style.top = '-9999px'
+  document.body.appendChild(textarea)
+  textarea.select()
+
+  try {
+    return document.execCommand('copy')
+  } catch {
+    return false
+  } finally {
+    textarea.remove()
+  }
+}
+
 function ProfileMenu() {
   const [open, setOpen] = useState(false)
+  const [copyStatus, setCopyStatus] = useState('idle')
   const containerRef = useRef(null)
   const triggerRef = useRef(null)
+  const copyResetTimer = useRef(null)
+
+  const closeMenu = () => {
+    setOpen(false)
+    setCopyStatus('idle')
+    clearTimeout(copyResetTimer.current)
+  }
+
+  const toggleMenu = () => {
+    if (open) {
+      closeMenu()
+      return
+    }
+
+    setOpen(true)
+  }
+
+  const handleCopyEmail = async () => {
+    const copied = await copyToClipboard(EMAIL)
+    setCopyStatus(copied ? 'copied' : 'error')
+    clearTimeout(copyResetTimer.current)
+    copyResetTimer.current = setTimeout(() => setCopyStatus('idle'), 2000)
+  }
 
   useEffect(() => {
     if (!open) return undefined
 
+    const close = () => {
+      setOpen(false)
+      setCopyStatus('idle')
+      clearTimeout(copyResetTimer.current)
+    }
+
     const handlePointerDown = (event) => {
       if (!containerRef.current?.contains(event.target)) {
-        setOpen(false)
+        close()
       }
     }
 
     const handleKeyDown = (event) => {
       if (event.key === 'Escape') {
-        setOpen(false)
+        close()
         triggerRef.current?.focus()
       }
     }
@@ -38,12 +95,17 @@ function ProfileMenu() {
     }
   }, [open])
 
+  useEffect(() => () => clearTimeout(copyResetTimer.current), [])
+
+  const isCopied = copyStatus === 'copied'
+  const isError = copyStatus === 'error'
+
   return (
     <div ref={containerRef} className="relative">
       <button
         ref={triggerRef}
         type="button"
-        onClick={() => setOpen((value) => !value)}
+        onClick={toggleMenu}
         aria-label="Open quick links"
         aria-haspopup="dialog"
         aria-controls="profile-menu"
@@ -70,14 +132,28 @@ function ProfileMenu() {
             Quick links
           </p>
 
-          <a
-            href={EMAIL_URL}
-            target="_blank"
-            rel="noreferrer"
-            onClick={() => setOpen(false)}
-            className="group mt-3 flex items-center gap-3 rounded-xl border border-primary/20 bg-primary/10 p-3 transition hover:border-primary/40 hover:bg-primary/15"
+          <button
+            type="button"
+            onClick={handleCopyEmail}
+            title={isCopied ? 'Copied' : 'Copy email address'}
+            aria-label={isCopied ? 'Email address copied' : `Copy email address ${EMAIL}`}
+            className={`group mt-3 flex w-full cursor-pointer items-center gap-3 rounded-xl border p-3 text-left transition ${
+              isCopied
+                ? 'border-success/30 bg-success/10'
+                : isError
+                  ? 'border-error/30 bg-error/10'
+                  : 'border-primary/20 bg-primary/10 hover:border-primary/40 hover:bg-primary/15'
+            }`}
           >
-            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-content">
+            <span
+              className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
+                isCopied
+                  ? 'bg-success text-success-content'
+                  : isError
+                    ? 'bg-error text-error-content'
+                    : 'bg-primary text-primary-content'
+              }`}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -96,37 +172,69 @@ function ProfileMenu() {
             </span>
 
             <span className="min-w-0 flex-1">
-              <span className="block text-[10px] uppercase tracking-wider text-base-content/50">
-                Email
+              <span
+                aria-live="polite"
+                className={`block text-[10px] uppercase tracking-wider ${
+                  isCopied ? 'text-success' : isError ? 'text-error' : 'text-base-content/50'
+                }`}
+              >
+                {isCopied ? 'Copied!' : isError ? 'Copy failed' : 'Email'}
               </span>
-              <span className="block truncate text-sm font-medium text-primary">
+              <span
+                className={`block truncate text-sm font-medium ${
+                  isCopied ? 'text-success' : isError ? 'text-error' : 'text-primary'
+                }`}
+              >
                 {EMAIL}
               </span>
             </span>
 
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth="1.8"
-              stroke="currentColor"
-              className="h-4 w-4 shrink-0 text-primary/70 transition group-hover:translate-x-0.5 group-hover:text-primary"
-              aria-hidden="true"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M4.5 12h15m0 0-6-6m6 6-6 6"
-              />
-            </svg>
-          </a>
+            {isCopied ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className="h-4 w-4 shrink-0 text-success"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+              </svg>
+            ) : isError ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                className="h-4 w-4 shrink-0 text-error"
+                aria-hidden="true"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.8"
+                stroke="currentColor"
+                className="h-4 w-4 shrink-0 text-primary/70 transition group-hover:text-primary"
+                aria-hidden="true"
+              >
+                <rect x="8" y="8" width="13" height="13" rx="2" />
+                <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3" />
+              </svg>
+            )}
+          </button>
 
           <div className="mt-3 border-t border-base-content/10 pt-2">
             {quickLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
-                onClick={() => setOpen(false)}
+                onClick={closeMenu}
                 className="flex items-center justify-between rounded-lg px-2 py-2 text-sm text-base-content/70 transition hover:bg-base-content/10 hover:text-base-content"
               >
                 {link.label}
