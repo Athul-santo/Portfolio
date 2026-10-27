@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import profileImage from '../assets/profile.jpg'
-
-const EMAIL = 'athulsanto14@gmail.com'
+import { EMAIL, EMAIL_URL } from '../contact'
 
 const quickLinks = [
   { label: 'About', href: '#about' },
@@ -72,7 +71,9 @@ function ProfileMenu() {
           </p>
 
           <a
-            href={`mailto:${EMAIL}`}
+            href={EMAIL_URL}
+            target="_blank"
+            rel="noreferrer"
             onClick={() => setOpen(false)}
             className="group mt-3 flex items-center gap-3 rounded-xl border border-primary/20 bg-primary/10 p-3 transition hover:border-primary/40 hover:bg-primary/15"
           >

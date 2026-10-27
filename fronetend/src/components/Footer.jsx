@@ -1,5 +1,6 @@
 
 import { Link } from 'react-router-dom'
+import { EMAIL_URL } from '../contact'
 
 function Footer() {
   const currentYear = new Date().getFullYear()
@@ -40,7 +41,9 @@ function Footer() {
             </a>
 
             <a
-              href="mailto:athulsanto14@gmail.com"
+              href={EMAIL_URL}
+              target="_blank"
+              rel="noreferrer"
               className="transition hover:text-primary"
             >
               Email ↗

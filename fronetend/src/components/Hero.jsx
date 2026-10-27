@@ -1,6 +1,7 @@
 
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { EMAIL_URL } from '../contact'
 
 const codeLines = [
   [
@@ -122,7 +123,9 @@ function Hero() {
             </Link>
 
             <a
-              href="mailto:athulsanto14@gmail.com"
+              href={EMAIL_URL}
+              target="_blank"
+              rel="noreferrer"
               className="rounded-lg border border-base-content/15 px-6 py-3 font-semibold text-base-content transition hover:border-primary hover:text-primary"
             >
               Contact Me
