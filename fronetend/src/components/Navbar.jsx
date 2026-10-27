@@ -1,5 +1,6 @@
 import { useState } from "react";
 import profileImage from "../assets/profile.jpg";
+import ThemeChanger from "./ThemeChanger";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -12,7 +13,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 z-50 w-full border-b border-slate-800 bg-[#020617]/95 backdrop-blur-md">
+    <nav className="fixed top-0 z-50 w-full border-b border-base-content/10 bg-base-100/95 backdrop-blur-md">
       <div className="flex items-center justify-between px-6 py-4">
         {/* Mobile Menu Button */}
         <button
@@ -20,7 +21,7 @@ export default function Navbar() {
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle navigation menu"
           aria-expanded={menuOpen}
-          className="text-2xl text-white md:hidden"
+          className="text-2xl text-base-content md:hidden"
         >
           {menuOpen ? "✕" : "☰"}
         </button>
@@ -33,8 +34,8 @@ export default function Navbar() {
               href={link.href}
               className={`transition-colors duration-200 ${
                 link.name === "Home"
-                  ? "text-cyan-400"
-                  : "text-slate-400 hover:text-cyan-400"
+                  ? "text-primary"
+                  : "text-base-content/60 hover:text-primary"
               }`}
             >
               {link.name}
@@ -42,26 +43,30 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Profile */}
-        <a href="#home" className="flex items-center">
-          <img
-            src={profileImage}
-            alt="Athul Santo"
-            className="h-11 w-11 rounded-full border-2 border-cyan-400 object-cover object-top"
-          />
-        </a>
+        {/* Theme control + profile */}
+        <div className="flex items-center gap-3">
+          <ThemeChanger />
+
+          <a href="#home" className="flex items-center">
+            <img
+              src={profileImage}
+              alt="Athul Santo"
+              className="h-11 w-11 rounded-full border-2 border-primary object-cover object-top"
+            />
+          </a>
+        </div>
       </div>
 
       {/* Mobile Navigation */}
       {menuOpen && (
-        <div className="border-t border-slate-800 bg-[#020617] px-6 py-5 md:hidden">
+        <div className="border-t border-base-content/10 bg-base-100 px-6 py-5 md:hidden">
           <div className="flex flex-col gap-5">
             {navLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
-                className="text-slate-300 transition hover:text-cyan-400"
+                className="text-base-content/75 transition hover:text-primary"
               >
                 {link.name}
               </a>

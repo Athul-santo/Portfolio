@@ -22,13 +22,13 @@ export default function Loader() {
     <div
       role="status"
       aria-label="Loading"
-      className={`fixed inset-0 z-[100] flex items-center justify-center bg-[#020617] transition-opacity duration-500 ${
+      className={`fixed inset-0 z-[100] flex items-center justify-center bg-base-100 transition-opacity duration-500 ${
         fading ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >
       <p
         aria-label="Athul Santo"
-        className="text-3xl font-bold tracking-tight text-white sm:text-4xl"
+        className="text-3xl font-bold tracking-tight text-base-content sm:text-4xl"
       >
         <span className="sr-only">Athul Santo</span>
         <span aria-hidden="true" className="whitespace-nowrap">
@@ -36,7 +36,7 @@ export default function Loader() {
             <span
               key={index} 
               className={`snake inline-block ${
-                char === "." ? "text-cyan-400" : ""
+                char === "." ? "text-primary" : ""
               }`}
               style={{ animationDelay: `${index * 0.07}s` }}
             >

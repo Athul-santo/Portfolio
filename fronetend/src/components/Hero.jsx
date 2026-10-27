@@ -4,36 +4,36 @@ import { Link } from 'react-router-dom'
 
 const codeLines = [
   [
-    { text: 'const ', className: 'text-fuchsia-400' },
-    { text: 'developer', className: 'text-cyan-300' },
+    { text: 'const ', className: 'text-secondary' },
+    { text: 'developer', className: 'text-primary' },
     { text: ' = {', className: '' },
   ],
   [
-    { text: '  name: ', className: 'text-slate-400' },
-    { text: "'Athul Santo'", className: 'text-emerald-300' },
+    { text: '  name: ', className: 'text-base-content/60' },
+    { text: "'Athul Santo'", className: 'text-success' },
     { text: ',', className: '' },
   ],
   [
-    { text: '  role: ', className: 'text-slate-400' },
-    { text: "'Full Stack Developer'", className: 'text-emerald-300' },
+    { text: '  role: ', className: 'text-base-content/60' },
+    { text: "'Full Stack Developer'", className: 'text-success' },
     { text: ',', className: '' },
   ],
   [
-    { text: '  stack: ', className: 'text-slate-400' },
+    { text: '  stack: ', className: 'text-base-content/60' },
     { text: '[', className: '' },
   ],
   [
-    { text: "    'React', 'Node.js',", className: 'text-emerald-300' },
+    { text: "    'React', 'Node.js',", className: 'text-success' },
   ],
   [
-    { text: "    'Express', 'MongoDB'", className: 'text-emerald-300' },
+    { text: "    'Express', 'MongoDB'", className: 'text-success' },
   ],
   [
     { text: '  ],', className: '' },
   ],
   [
-    { text: '  mindset: ', className: 'text-slate-400' },
-    { text: "'Always learning'", className: 'text-emerald-300' },
+    { text: '  mindset: ', className: 'text-base-content/60' },
+    { text: "'Always learning'", className: 'text-success' },
   ],
   [
     { text: '}', className: '' },
@@ -62,42 +62,50 @@ function Hero() {
   }, [])
 
   useEffect(() => {
-    if (!typingStarted || typedChars >= totalChars) return
+    if (!typingStarted) return
 
-    const typeTimer = setTimeout(() => {
-      setTypedChars((count) => count + 1)
-    }, 18)
+    const startedAt = performance.now()
 
-    return () => clearTimeout(typeTimer)
-  }, [typingStarted, typedChars])
+    const intervalId = setInterval(() => {
+      const elapsed = performance.now() - startedAt
+      const next = Math.min(totalChars, Math.floor(elapsed / 18))
+      setTypedChars(next)
+
+      if (next >= totalChars) {
+        clearInterval(intervalId)
+      }
+    }, 20)
+
+    return () => clearInterval(intervalId)
+  }, [typingStarted])
 
   return (
-    <section className="relative isolate overflow-hidden">
+    <section id="home" className="relative isolate overflow-hidden">
       {/* Background effects */}
-      <div className="pointer-events-none absolute -right-40 -top-20 -z-10 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-20 -left-40 -z-10 h-96 w-96 rounded-full bg-blue-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -right-40 -top-20 -z-10 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-20 -left-40 -z-10 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
 
       <div className="grid items-center gap-14 px-6 py-24 md:grid-cols-2 md:py-32">
         {/* Introduction */}
         <div>
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-emerald-400/20 bg-emerald-400/10 px-4 py-2 text-sm text-emerald-300">
-            <span className="h-2 w-2 animate-pulse rounded-full bg-emerald-400" />
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-success/25 bg-success/10 px-4 py-2 text-sm text-success">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-success" />
             Open to opportunities
           </div>
 
-          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-cyan-400">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-primary">
             Hello, I'm
           </p>
 
           <h1 className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-            Athul Santo<span className="text-cyan-400">.</span>
+            Athul Santo<span className="text-primary">.</span>
           </h1>
 
-          <h2 className="mt-5 text-2xl font-semibold text-slate-300 sm:text-3xl">
+          <h2 className="mt-5 text-2xl font-semibold text-base-content/80 sm:text-3xl">
             Full Stack Developer
           </h2>
 
-          <p className="mt-6 max-w-xl text-base leading-8 text-slate-400">
+          <p className="mt-6 max-w-xl text-base leading-8 text-base-content/70">
             I build responsive web applications and enjoy turning ideas
             into practical digital experiences. With hands-on experience
             in frontend and backend development, I'm continuously improving
@@ -108,26 +116,26 @@ function Hero() {
           <div className="mt-9 flex flex-wrap gap-4">
             <Link
               to="/projects"
-              className="rounded-lg bg-cyan-400 px-6 py-3 font-semibold text-slate-950 transition hover:-translate-y-1 hover:bg-cyan-300"
+              className="rounded-lg bg-primary px-6 py-3 font-semibold text-primary-content transition hover:-translate-y-1 hover:bg-primary/90"
             >
               View Projects ↗
             </Link>
 
             <a
               href="mailto:YOUR_EMAIL@example.com"
-              className="rounded-lg border border-white/15 px-6 py-3 font-semibold text-white transition hover:border-cyan-400 hover:text-cyan-300"
+              className="rounded-lg border border-base-content/15 px-6 py-3 font-semibold text-base-content transition hover:border-primary hover:text-primary"
             >
               Contact Me
             </a>
           </div>
 
           {/* Social links */}
-          <div className="mt-10 flex gap-6 text-sm text-slate-400">
+          <div className="mt-10 flex gap-6 text-sm text-base-content/60">
             <a
               href="https://github.com/YOUR_USERNAME"
               target="_blank"
               rel="noreferrer"
-              className="transition hover:text-cyan-400"
+              className="transition hover:text-primary"
             >
               GitHub ↗
             </a>
@@ -136,7 +144,7 @@ function Hero() {
               href="https://linkedin.com/in/YOUR_PROFILE"
               target="_blank"
               rel="noreferrer"
-              className="transition hover:text-cyan-400"
+              className="transition hover:text-primary"
             >
               LinkedIn ↗
             </a>
@@ -145,15 +153,15 @@ function Hero() {
 
         {/* Developer code card */}
         <div className="relative">
-          <div className="absolute -inset-3 rounded-3xl bg-cyan-400/10 blur-2xl" />
+          <div className="absolute -inset-3 rounded-3xl bg-primary/15 blur-2xl" />
 
-          <div className="relative rounded-2xl border border-white/10 bg-slate-900/90 p-6 shadow-2xl sm:p-8">
+          <div className="relative rounded-2xl border border-base-content/10 bg-base-200/90 p-6 shadow-2xl sm:p-8">
             {/* Window header */}
-            <div className="mb-8 flex items-center gap-2 border-b border-white/10 pb-5">
-              <span className="h-3 w-3 rounded-full bg-red-400" />
-              <span className="h-3 w-3 rounded-full bg-yellow-400" />
-              <span className="h-3 w-3 rounded-full bg-green-400" />
-              <span className="ml-auto font-mono text-xs text-slate-500">
+            <div className="mb-8 flex items-center gap-2 border-b border-base-content/10 pb-5">
+              <span className="h-3 w-3 rounded-full bg-error" />
+              <span className="h-3 w-3 rounded-full bg-warning" />
+              <span className="h-3 w-3 rounded-full bg-success" />
+              <span className="ml-auto font-mono text-xs text-base-content/50">
                 developer.js
               </span>
             </div>
@@ -188,16 +196,16 @@ function Hero() {
                     })}
 
                     {isActive && (
-                      <span className="ml-0.5 inline-block h-5 w-0.5 animate-pulse rounded-full bg-cyan-400 align-middle" />
+                      <span className="ml-0.5 inline-block h-5 w-0.5 animate-pulse rounded-full bg-primary align-middle" />
                     )}
                   </p>
                 )
               })}
             </div>
 
-            <div className="mt-7 rounded-xl border border-cyan-400/10 bg-cyan-400/5 p-4">
-              <p className="text-sm leading-6 text-slate-300">
-                <span className="mr-2 text-cyan-400">→</span>
+            <div className="mt-7 rounded-xl border border-primary/15 bg-primary/5 p-4">
+              <p className="text-sm leading-6 text-base-content/80">
+                <span className="mr-2 text-primary">→</span>
                 Learning, building, and improving one line of code at a time.
               </p>
             </div>

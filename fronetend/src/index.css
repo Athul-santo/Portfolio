@@ -1,5 +1,83 @@
 @import "tailwindcss";
 
+@plugin "daisyui" {
+  themes: cyberpunk, dracula, forest, nord, retro, synthwave;
+}
+
+@plugin "daisyui/theme" {
+  name: "athuldark";
+  default: true;
+  prefersdark: false;
+  color-scheme: dark;
+
+  --color-base-100: #020617;
+  --color-base-200: #0f172a;
+  --color-base-300: #1e293b;
+  --color-base-content: #f8fafc;
+  --color-primary: #22d3ee;
+  --color-primary-content: #020617;
+  --color-secondary: #e879f9;
+  --color-secondary-content: #020617;
+  --color-accent: #34d399;
+  --color-accent-content: #020617;
+  --color-neutral: #1e293b;
+  --color-neutral-content: #f8fafc;
+  --color-info: #38bdf8;
+  --color-info-content: #020617;
+  --color-success: #34d399;
+  --color-success-content: #020617;
+  --color-warning: #fbbf24;
+  --color-warning-content: #020617;
+  --color-error: #fb7185;
+  --color-error-content: #020617;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
+@plugin "daisyui/theme" {
+  name: "athullight";
+  default: false;
+  prefersdark: false;
+  color-scheme: light;
+
+  --color-base-100: #f8fafc;
+  --color-base-200: #f1f5f9;
+  --color-base-300: #e2e8f0;
+  --color-base-content: #0f172a;
+  --color-primary: #0e7490;
+  --color-primary-content: #ffffff;
+  --color-secondary: #a21caf;
+  --color-secondary-content: #ffffff;
+  --color-accent: #047857;
+  --color-accent-content: #ffffff;
+  --color-neutral: #1e293b;
+  --color-neutral-content: #f8fafc;
+  --color-info: #0369a1;
+  --color-info-content: #ffffff;
+  --color-success: #047857;
+  --color-success-content: #ffffff;
+  --color-warning: #b45309;
+  --color-warning-content: #ffffff;
+  --color-error: #be123c;
+  --color-error-content: #ffffff;
+
+  --radius-selector: 0.5rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
+}
+
 @keyframes snake {
   0%,
   100% {
