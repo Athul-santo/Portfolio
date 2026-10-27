@@ -40,7 +40,7 @@ function Footer() {
             </a>
 
             <a
-              href="mailto:YOUR_EMAIL@example.com"
+              href="mailto:athulsanto14@gmail.com"
               className="transition hover:text-primary"
             >
               Email ↗

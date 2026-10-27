@@ -122,7 +122,7 @@ function Hero() {
             </Link>
 
             <a
-              href="mailto:YOUR_EMAIL@example.com"
+              href="mailto:athulsanto14@gmail.com"
               className="rounded-lg border border-base-content/15 px-6 py-3 font-semibold text-base-content transition hover:border-primary hover:text-primary"
             >
               Contact Me

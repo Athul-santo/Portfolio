@@ -44,7 +44,10 @@ const technologies = [
 
 function TechStack() {
   return (
-    <section id="tech-stack" className="border-t border-base-content/10 bg-base-200/40">
+    <section
+      id="tech-stack"
+      className="scroll-mt-24 border-t border-base-content/10 bg-base-200/40"
+    >
       <div className="px-6 py-20 sm:py-24">
         {/* Section heading */}
         <div className="mb-12">

@@ -1,31 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 import profileImage from '../assets/profile.jpg'
-import {
-  initialTheme,
-  THEMES,
-  THEME_STORAGE_KEY,
-} from '../theme'
 
-const facts = [
-  { label: 'stack', value: 'React, Node.js, Express, MongoDB' },
-  { label: 'mindset', value: 'Always learning' },
+const EMAIL = 'athulsanto14@gmail.com'
+
+const quickLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Tech stack', href: '#tech-stack' },
+  { label: 'Back to top', href: '#home' },
 ]
 
 function ProfileMenu() {
   const [open, setOpen] = useState(false)
-  const [theme, setTheme] = useState(initialTheme)
   const containerRef = useRef(null)
   const triggerRef = useRef(null)
-
-  useEffect(() => {
-    document.documentElement.setAttribute('data-theme', theme)
-
-    try {
-      localStorage.setItem(THEME_STORAGE_KEY, theme)
-    } catch {
-      // Storage can be unavailable in private browsing.
-    }
-  }, [theme])
 
   useEffect(() => {
     if (!open) return undefined
@@ -52,15 +39,13 @@ function ProfileMenu() {
     }
   }, [open])
 
-  const activeTheme = THEMES.find((option) => option.name === theme)
-
   return (
     <div ref={containerRef} className="relative">
       <button
         ref={triggerRef}
         type="button"
         onClick={() => setOpen((value) => !value)}
-        aria-label="Open profile and theme settings"
+        aria-label="Open quick links"
         aria-haspopup="dialog"
         aria-controls="profile-menu"
         aria-expanded={open}
@@ -70,9 +55,7 @@ function ProfileMenu() {
           src={profileImage}
           alt="Athul Santo"
           className={`h-11 w-11 rounded-full border-2 object-cover object-top transition ${
-            open
-              ? 'border-primary'
-              : 'border-primary/70 hover:border-primary'
+            open ? 'border-primary' : 'border-primary/70 hover:border-primary'
           }`}
         />
       </button>
@@ -81,96 +64,89 @@ function ProfileMenu() {
         <div
           id="profile-menu"
           role="dialog"
-          aria-label="Profile and theme settings"
-          className="absolute right-0 top-full z-50 mt-3 max-h-[calc(100vh-6rem)] w-84 max-w-[calc(100vw-3rem)] overflow-y-auto overscroll-contain rounded-box border border-base-content/10 bg-base-200 p-5 shadow-2xl"
+          aria-label="Quick links"
+          className="absolute right-0 top-full z-50 mt-3 w-80 max-w-[calc(100vw-3rem)] rounded-box border border-base-content/10 bg-base-200 p-4 shadow-2xl"
         >
-          <div className="flex items-center gap-3 border-b border-base-content/10 pb-4">
-            <img
-              src={profileImage}
-              alt=""
-              className="h-14 w-14 shrink-0 rounded-full border-2 border-primary object-cover object-top"
-            />
+          <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-base-content/50">
+            Quick links
+          </p>
 
-            <div className="min-w-0">
-              <p className="truncate font-semibold text-base-content">
-                Athul Santo
-              </p>
-              <p className="mt-0.5 text-sm text-base-content/60">
-                Full Stack Developer
-              </p>
-            </div>
-          </div>
-
-          <dl className="mt-4 space-y-3">
-            {facts.map((fact) => (
-              <div
-                key={fact.label}
-                className="grid grid-cols-[4.5rem_1fr] gap-3"
+          <a
+            href={`mailto:${EMAIL}`}
+            onClick={() => setOpen(false)}
+            className="group mt-3 flex items-center gap-3 rounded-xl border border-primary/20 bg-primary/10 p-3 transition hover:border-primary/40 hover:bg-primary/15"
+          >
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-content">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.8"
+                stroke="currentColor"
+                className="h-4 w-4"
+                aria-hidden="true"
               >
-                <dt className="font-mono text-[10px] uppercase tracking-wider text-base-content/50">
-                  {fact.label}
-                </dt>
-                <dd className="text-sm leading-5 text-base-content/80">
-                  {fact.value}
-                </dd>
-              </div>
-            ))}
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                />
+              </svg>
+            </span>
 
-            <div className="grid grid-cols-[4.5rem_1fr] gap-3">
-              <dt className="font-mono text-[10px] uppercase tracking-wider text-base-content/50">
-                status
-              </dt>
-              <dd className="flex items-center gap-2 text-sm leading-5 text-success">
-                <span className="h-2 w-2 animate-pulse rounded-full bg-success" />
-                Open to opportunities
-              </dd>
-            </div>
-          </dl>
-
-          <div className="mt-5 border-t border-base-content/10 pt-4">
-            <div className="mb-2.5 flex items-center justify-between">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-base-content/50">
-                Theme
-              </p>
-              <span className="text-[10px] uppercase tracking-wider text-base-content/40">
-                {activeTheme?.label}
+            <span className="min-w-0 flex-1">
+              <span className="block text-[10px] uppercase tracking-wider text-base-content/50">
+                Email
               </span>
-            </div>
+              <span className="block truncate text-sm font-medium text-primary">
+                {EMAIL}
+              </span>
+            </span>
 
-            <div
-              role="group"
-              aria-label="Color theme"
-              className="grid grid-cols-2 gap-1.5"
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.8"
+              stroke="currentColor"
+              className="h-4 w-4 shrink-0 text-primary/70 transition group-hover:translate-x-0.5 group-hover:text-primary"
+              aria-hidden="true"
             >
-              {THEMES.map((option) => {
-                const isActive = option.name === theme
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 12h15m0 0-6-6m6 6-6 6"
+              />
+            </svg>
+          </a>
 
-                return (
-                  <button
-                    key={option.name}
-                    type="button"
-                    aria-pressed={isActive}
-                    onClick={() => setTheme(option.name)}
-                    className={`flex items-center gap-2 rounded-lg border px-2 py-1.5 text-left text-xs transition ${
-                      isActive
-                        ? 'border-primary/60 bg-primary/10 text-primary'
-                        : 'border-base-content/10 bg-base-100/50 text-base-content/70 hover:border-base-content/25 hover:text-base-content'
-                    }`}
-                  >
-                    <span
-                      data-theme={option.name}
-                      className="flex shrink-0 gap-0.5 rounded-full border border-base-content/10 bg-base-100 p-1"
-                    >
-                      <span className="h-2 w-2 rounded-full bg-primary" />
-                      <span className="h-2 w-2 rounded-full bg-secondary" />
-                      <span className="h-2 w-2 rounded-full bg-accent" />
-                    </span>
+          <div className="mt-3 border-t border-base-content/10 pt-2">
+            {quickLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="flex items-center justify-between rounded-lg px-2 py-2 text-sm text-base-content/70 transition hover:bg-base-content/10 hover:text-base-content"
+              >
+                {link.label}
 
-                    <span className="truncate">{option.label}</span>
-                  </button>
-                )
-              })}
-            </div>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.8"
+                  stroke="currentColor"
+                  className="h-3.5 w-3.5 text-base-content/40"
+                  aria-hidden="true"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8.25 4.5l7.5 7.5-7.5 7.5"
+                  />
+                </svg>
+              </a>
+            ))}
           </div>
         </div>
       )}

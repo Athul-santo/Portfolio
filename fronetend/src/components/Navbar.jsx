@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ProfileMenu from "./ProfileMenu";
+import ThemeMenu from "./ThemeMenu";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -42,8 +43,11 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Profile + theme settings */}
-        <ProfileMenu />
+        {/* Theme control + profile */}
+        <div className="flex items-center gap-2">
+          <ThemeMenu />
+          <ProfileMenu />
+        </div>
       </div>
 
       {/* Mobile Navigation */}
