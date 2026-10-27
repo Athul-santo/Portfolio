@@ -121,7 +121,7 @@ function ThemeMenu({ theme, onSelect, variant = 'desktop' }) {
             open ? 'text-primary' : 'text-base-content/75 hover:text-primary'
           }`}
         >
-          <span>ThemeMenu</span>
+          <span>Theme Menu</span>
           <ChevronIcon
             className={`h-4 w-4 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
           />
@@ -149,7 +149,7 @@ function ThemeMenu({ theme, onSelect, variant = 'desktop' }) {
           open ? 'text-primary' : 'text-base-content/60 hover:text-primary'
         }`}
       >
-        ThemeMenu
+        Theme Menu
         <ChevronIcon
           className={`h-3 w-3 transition-transform duration-200 ${open ? 'rotate-180' : ''}`}
         />
