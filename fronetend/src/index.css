@@ -1,12 +1,12 @@
 @import "tailwindcss";
 
 @plugin "daisyui" {
-  themes: cyberpunk, dracula, forest, nord, retro, synthwave;
+  themes: forest --default, cyberpunk, dracula, nord, retro, synthwave;
 }
 
 @plugin "daisyui/theme" {
   name: "athuldark";
-  default: true;
+  default: false;
   prefersdark: false;
   color-scheme: dark;
 

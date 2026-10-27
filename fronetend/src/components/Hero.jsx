@@ -98,7 +98,7 @@ function Hero() {
           </p>
 
           <h1 className="text-5xl font-bold tracking-tight sm:text-6xl lg:text-7xl">
-            Athul Santo<span className="text-primary">.</span>
+            Athul Santo<span className="text-primary"></span>
           </h1>
 
           <h2 className="mt-5 text-2xl font-semibold text-base-content/80 sm:text-3xl">

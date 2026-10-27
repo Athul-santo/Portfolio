@@ -1,6 +1,5 @@
 import { useState } from "react";
-import profileImage from "../assets/profile.jpg";
-import ThemeChanger from "./ThemeChanger";
+import ProfileMenu from "./ProfileMenu";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -43,18 +42,8 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Theme control + profile */}
-        <div className="flex items-center gap-3">
-          <ThemeChanger />
-
-          <a href="#home" className="flex items-center">
-            <img
-              src={profileImage}
-              alt="Athul Santo"
-              className="h-11 w-11 rounded-full border-2 border-primary object-cover object-top"
-            />
-          </a>
-        </div>
+        {/* Profile + theme settings */}
+        <ProfileMenu />
       </div>
 
       {/* Mobile Navigation */}
