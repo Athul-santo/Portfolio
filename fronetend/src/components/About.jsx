@@ -19,7 +19,9 @@ const focusAreas = [
 ]
 
 const facts = [
-  { label: 'stack', value: 'React, Node.js, Express, MongoDB' },
+  { label: 'education', value: 'BCA' },
+  { label: 'experience', value: 'Internship at Aionpixel Technologies' },
+  { label: 'stack', value: 'MERN stack' },
   { label: 'mindset', value: 'Always learning' },
 ]
 
@@ -38,24 +40,33 @@ function About() {
             </p>
 
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Across the stack, always learning
+              Full stack, real-world experience
               <span className="text-primary">.</span>
             </h2>
 
             <div className="mt-6 max-w-2xl space-y-5 text-base leading-8 text-base-content/70">
               <p>
-                I&apos;m Athul Santo, a Full Stack Developer who enjoys turning
-                ideas into responsive, practical web applications. I work
-                across the stack — building interfaces with React, powering
-                them with Node.js and Express, and keeping the data organized
-                with MongoDB.
+                I&apos;m Athul Santo, a Full Stack Developer with a BCA
+                (Bachelor of Computer Applications) background and hands-on
+                experience building web applications using modern technologies.
+                I enjoy turning ideas into practical, user-friendly digital
+                experiences.
               </p>
 
               <p>
-                I care about the details that make a product feel right: clean
-                layouts, readable code, and solutions that solve the actual
-                problem. My mindset is simple — stay curious, keep improving,
-                and ship work I&apos;m proud of.
+                During my internship at Aionpixel Technologies, I worked on web
+                application modules, REST API integration, database
+                interactions, and frontend-backend communication. This
+                experience helped me understand how real-world applications are
+                developed and maintained.
+              </p>
+
+              <p>
+                My current focus is on strengthening my skills in the MERN
+                stack, writing clean and maintainable code, and building
+                projects that solve real-world problems. I&apos;m always eager
+                to learn new technologies, collaborate with others, and grow as
+                a software developer.
               </p>
             </div>
 
