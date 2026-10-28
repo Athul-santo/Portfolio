@@ -94,10 +94,6 @@ function Contact() {
               <ArrowUpRightIcon className="h-4 w-4" />
             </a>
 
-            <div className="mt-8 flex items-center gap-2 text-sm text-success">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-success" />
-              Open to opportunities
-            </div>
           </div>
 
           <div className="lg:col-span-7">

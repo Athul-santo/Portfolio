@@ -132,29 +132,6 @@ function Hero() {
               Contact Me
             </a>
           </div>
-
-          {/* Social links */}
-          <div className="mt-10 flex gap-6 text-sm text-base-content/60">
-            <a
-              href={GITHUB_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 transition hover:text-primary"
-            >
-              GitHub
-              <ArrowUpRightIcon className="h-3 w-3" />
-            </a>
-
-            <a
-              href={LINKEDIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 transition hover:text-primary"
-            >
-              LinkedIn
-              <ArrowUpRightIcon className="h-3 w-3" />
-            </a>
-          </div>
         </div>
 
         {/* Developer code card */}
@@ -173,7 +150,7 @@ function Hero() {
             </div>
 
             {/* Code content */}
-            <div className="min-h-[288px] overflow-x-auto font-mono text-sm leading-8 sm:text-base">
+            <div className="min-h-288px overflow-x-auto font-mono text-sm leading-8 sm:text-base">
               {codeLines.map((line, lineIndex) => {
                 const lineStart = lineOffsets[lineIndex]
                 const lineLength = getLineLength(line)
