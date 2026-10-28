@@ -1,6 +1,5 @@
 
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { EMAIL_URL, GITHUB_URL, LINKEDIN_URL } from '../contact'
 import { ArrowUpRightIcon } from './icons'
 
@@ -116,13 +115,13 @@ function Hero() {
 
           {/* Action buttons */}
           <div className="mt-9 flex flex-wrap gap-4">
-            <Link
-              to="/projects"
+            <a
+              href="#projects"
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-content transition hover:-translate-y-1 hover:bg-primary/90"
             >
               View Projects
               <ArrowUpRightIcon className="h-4 w-4" />
-            </Link>
+            </a>
 
             <a
               href={EMAIL_URL}
