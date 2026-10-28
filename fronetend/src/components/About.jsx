@@ -112,9 +112,9 @@ function About() {
                 {facts.map((fact) => (
                   <div
                     key={fact.label}
-                    className="grid grid-cols-[5.5rem_1fr] gap-4"
+                    className="grid grid-cols-[5.5rem_1fr] items-start gap-4"
                   >
-                    <dt className="font-mono text-xs uppercase tracking-wider text-base-content/50">
+                    <dt className="font-mono text-xs uppercase leading-6 tracking-wider text-base-content/50">
                       {fact.label}
                     </dt>
                     <dd className="text-sm leading-6 text-base-content/80">
@@ -123,8 +123,8 @@ function About() {
                   </div>
                 ))}
 
-                <div className="grid grid-cols-[5.5rem_1fr] gap-4">
-                  <dt className="font-mono text-xs uppercase tracking-wider text-base-content/50">
+                <div className="grid grid-cols-[5.5rem_1fr] items-start gap-4">
+                  <dt className="font-mono text-xs uppercase leading-6 tracking-wider text-base-content/50">
                     status
                   </dt>
                   <dd className="flex items-center gap-2 text-sm leading-6 text-success">
