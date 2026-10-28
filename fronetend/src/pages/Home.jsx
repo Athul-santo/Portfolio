@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Hero from '../components/Hero'
 import About from '../components/About'
 import TechStack from '../components/TechStack'
+import Contact from '../components/Contact'
 import Footer from '../components/Footer'
 
 function Home() {
@@ -14,6 +15,7 @@ function Home() {
         <Hero />
         <About />
         <TechStack />
+        <Contact />
       </main>
 
       <Footer />

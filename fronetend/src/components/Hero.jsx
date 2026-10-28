@@ -1,7 +1,8 @@
 
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { EMAIL_URL } from '../contact'
+import { EMAIL_URL, GITHUB_URL, LINKEDIN_URL } from '../contact'
+import { ArrowUpRightIcon } from './icons'
 
 const codeLines = [
   [
@@ -117,15 +118,16 @@ function Hero() {
           <div className="mt-9 flex flex-wrap gap-4">
             <Link
               to="/projects"
-              className="rounded-lg bg-primary px-6 py-3 font-semibold text-primary-content transition hover:-translate-y-1 hover:bg-primary/90"
+              className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-semibold text-primary-content transition hover:-translate-y-1 hover:bg-primary/90"
             >
-              View Projects ↗
+              View Projects
+              <ArrowUpRightIcon className="h-4 w-4" />
             </Link>
 
             <a
               href={EMAIL_URL}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               className="rounded-lg border border-base-content/15 px-6 py-3 font-semibold text-base-content transition hover:border-primary hover:text-primary"
             >
               Contact Me
@@ -135,21 +137,23 @@ function Hero() {
           {/* Social links */}
           <div className="mt-10 flex gap-6 text-sm text-base-content/60">
             <a
-              href="https://github.com/Athul-santo/"
+              href={GITHUB_URL}
               target="_blank"
-              rel="noreferrer"
-              className="transition hover:text-primary"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 transition hover:text-primary"
             >
-              GitHub ↗
+              GitHub
+              <ArrowUpRightIcon className="h-3 w-3" />
             </a>
 
             <a
-              href="https://www.linkedin.com/in/athul-santo/"
+              href={LINKEDIN_URL}
               target="_blank"
-              rel="noreferrer"
-              className="transition hover:text-primary"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 transition hover:text-primary"
             >
-              LinkedIn ↗
+              LinkedIn
+              <ArrowUpRightIcon className="h-3 w-3" />
             </a>
           </div>
         </div>
