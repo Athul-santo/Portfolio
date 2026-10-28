@@ -149,7 +149,7 @@ function Projects() {
     <section
       id="projects"
       aria-labelledby="projects-heading"
-      className="scroll-mt-24 border-t border-base-content/10 bg-base-100"
+      className="scroll-mt-20 border-t border-base-content/10 bg-base-100"
     >
       <div className="px-6 py-20 sm:py-24">
         <div className="mb-10 max-w-2xl">

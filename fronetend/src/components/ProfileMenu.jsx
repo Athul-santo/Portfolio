@@ -110,12 +110,12 @@ function ProfileMenu() {
         aria-haspopup="dialog"
         aria-controls="profile-menu"
         aria-expanded={open}
-        className="rounded-full transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
+        className="block rounded-full transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-base-100"
       >
         <img
           src={profileImage}
           alt="Athul Santo"
-          className={`h-11 w-11 rounded-full border-2 object-cover object-top transition ${
+          className={`block h-11 w-11 rounded-full border-2 object-cover object-top transition ${
             open ? 'border-primary' : 'border-primary/70 hover:border-primary'
           }`}
         />
