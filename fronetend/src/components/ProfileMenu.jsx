@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import profileImage from '../assets/profile.jpg'
-import { EMAIL } from '../contact'
+import { EMAIL, RESUME_FILENAME, RESUME_URL } from '../contact'
 
 const quickLinks = [
   { label: 'About', href: '#about' },
@@ -228,6 +228,35 @@ function ProfileMenu() {
               </svg>
             )}
           </button>
+
+          <a
+            href={RESUME_URL}
+            download={RESUME_FILENAME}
+            className="group mt-2 flex w-full items-center justify-between rounded-lg border border-base-content/10 bg-base-100/50 px-3 py-2 text-sm text-base-content/70 transition hover:border-primary/40 hover:bg-primary/10 hover:text-primary"
+          >
+            <span className="flex items-center gap-2">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.8"
+                stroke="currentColor"
+                className="h-4 w-4"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M12 3v12m0 0 4.5-4.5M12 15l-4.5-4.5M4.5 19.5h15"
+                />
+              </svg>
+              Download resume
+            </span>
+
+            <span className="text-[10px] font-semibold uppercase tracking-wider text-base-content/40">
+              PDF
+            </span>
+          </a>
 
           <div className="mt-3 border-t border-base-content/10 pt-2">
             {quickLinks.map((link) => (

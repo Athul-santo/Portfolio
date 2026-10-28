@@ -1,6 +1,6 @@
 
 import { Link } from 'react-router-dom'
-import { EMAIL_URL } from '../contact'
+import { EMAIL_URL, RESUME_FILENAME, RESUME_URL } from '../contact'
 
 function Footer() {
   const currentYear = new Date().getFullYear()
@@ -47,6 +47,14 @@ function Footer() {
               className="transition hover:text-primary"
             >
               Email ↗
+            </a>
+
+            <a
+              href={RESUME_URL}
+              download={RESUME_FILENAME}
+              className="transition hover:text-primary"
+            >
+              Resume ↓
             </a>
 
             <a
