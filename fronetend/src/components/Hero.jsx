@@ -144,7 +144,7 @@ function Hero() {
             </a>
 
             <a
-              href="https://linkedin.com/in/YOUR_PROFILE"
+              href="https://www.linkedin.com/in/athul-santo/"
               target="_blank"
               rel="noreferrer"
               className="transition hover:text-primary"

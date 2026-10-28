@@ -62,7 +62,10 @@ function Footer() {
                 </svg>
               </SocialLink>
 
-              <SocialLink href="https://linkedin.com/in/YOUR_PROFILE" label="LinkedIn">
+              <SocialLink
+                href="https://www.linkedin.com/in/athul-santo/"
+                label="LinkedIn"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 448 512"
