@@ -1,44 +1,68 @@
+import {
+  ClaudeIcon,
+  DaisyUIIcon,
+  ExpressIcon,
+  GitIcon,
+  GitHubTechIcon,
+  JavaScriptIcon,
+  KiroIcon,
+  MongoDBIcon,
+  MySQLIcon,
+  NodeIcon,
+  OpenCodeIcon,
+  PostgreSQLIcon,
+  PythonIcon,
+  ReactIcon,
+  RedisIcon,
+  TailwindIcon,
+} from './techIcons'
 
-const technologies = [
+const groups = [
   {
-    name: 'JavaScript',
-    category: 'Language',
-    symbol: 'JS',
+    label: 'Languages',
+    items: [
+      { name: 'JavaScript', Icon: JavaScriptIcon },
+      { name: 'Python', Icon: PythonIcon },
+    ],
   },
   {
-    name: 'React',
-    category: 'Frontend',
-    symbol: 'RE',
+    label: 'Frontend',
+    items: [
+      { name: 'React', Icon: ReactIcon },
+      { name: 'Tailwind CSS', Icon: TailwindIcon },
+      { name: 'daisyUI', Icon: DaisyUIIcon },
+    ],
   },
   {
-    name: 'Node.js',
-    category: 'Backend',
-    symbol: 'NO',
+    label: 'Backend',
+    items: [
+      { name: 'Node.js', Icon: NodeIcon },
+      { name: 'Express.js', Icon: ExpressIcon },
+    ],
   },
   {
-    name: 'Express.js',
-    category: 'Backend',
-    symbol: 'EX',
+    label: 'Databases',
+    items: [
+      { name: 'MySQL', Icon: MySQLIcon },
+      { name: 'PostgreSQL', Icon: PostgreSQLIcon },
+      { name: 'MongoDB', Icon: MongoDBIcon },
+      { name: 'Redis', Icon: RedisIcon },
+    ],
   },
   {
-    name: 'MongoDB',
-    category: 'Database',
-    symbol: 'DB',
+    label: 'Tools',
+    items: [
+      { name: 'Git', Icon: GitIcon },
+      { name: 'GitHub', Icon: GitHubTechIcon },
+    ],
   },
   {
-    name: 'SQL',
-    category: 'Database',
-    symbol: 'SQ',
-  },
-  {
-    name: 'Tailwind CSS',
-    category: 'Styling',
-    symbol: 'TW',
-  },
-  {
-    name: 'Git & GitHub',
-    category: 'Tools',
-    symbol: 'GT',
+    label: 'AI',
+    items: [
+      { name: 'Claude', Icon: ClaudeIcon },
+      { name: 'Kiro', Icon: KiroIcon },
+      { name: 'OpenCode', Icon: OpenCodeIcon },
+    ],
   },
 ]
 
@@ -50,7 +74,7 @@ function TechStack() {
     >
       <div className="px-6 py-20 sm:py-24">
         {/* Section heading */}
-        <div className="mb-12">
+        <div className="mb-10 max-w-2xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-primary">
             My toolkit
           </p>
@@ -59,30 +83,39 @@ function TechStack() {
             Technologies I work with<span className="text-primary">.</span>
           </h2>
 
-          <p className="mt-4 max-w-2xl leading-7 text-base-content/70">
+          <p className="mt-4 leading-7 text-base-content/70">
             Tools and technologies I use to build, test, and improve web
             applications.
           </p>
         </div>
 
-        {/* Technology cards */}
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {technologies.map((tech) => (
+        {/* Compact, grouped technology cards */}
+        <div className="grid grid-cols-2 gap-3 sm:gap-4 md:grid-cols-3 xl:grid-cols-6">
+          {groups.map((group) => (
             <div
-              key={tech.name}
-              className="group rounded-xl border border-base-content/10 bg-base-100 p-5 transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-base-200"
+              key={group.label}
+              className="rounded-xl border border-base-content/10 bg-base-100 p-3 sm:p-4"
             >
-              <div className="mb-5 flex h-11 w-11 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 font-mono text-sm font-bold text-primary transition group-hover:bg-primary group-hover:text-primary-content">
-                {tech.symbol}
-              </div>
-
-              <h3 className="font-semibold text-base-content">
-                {tech.name}
-              </h3>
-
-              <p className="mt-1 text-sm text-base-content/50">
-                {tech.category}
+              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-base-content/40">
+                {group.label}
               </p>
+
+              <ul className="mt-3 space-y-1">
+                {group.items.map(({ name, Icon }) => (
+                  <li
+                    key={name}
+                    className="flex items-center gap-2.5 rounded-lg px-1.5 py-1.5"
+                  >
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md border border-primary/15 bg-primary/10">
+                      <Icon className="h-5 w-5 text-base-content/80" />
+                    </span>
+
+                    <span className="min-w-0 text-sm font-medium leading-5 text-base-content/80">
+                      {name}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>

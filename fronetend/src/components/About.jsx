@@ -13,7 +13,7 @@ const focusAreas = [
   },
   {
     title: 'Data',
-    tools: 'MongoDB · SQL',
+    tools: 'MySQL · PostgreSQL · MongoDB',
     description: 'Clean, structured data and the queries that make it useful.',
   },
 ]
