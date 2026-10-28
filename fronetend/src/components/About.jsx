@@ -31,8 +31,8 @@ function About() {
       id="about"
       className="scroll-mt-20 border-t border-base-content/10 bg-base-100"
     >
-      <div className="px-6 py-20 sm:py-24">
-        <div className="grid gap-14 lg:grid-cols-12 lg:gap-16">
+      <div className="px-6 py-14 sm:py-16">
+        <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
           {/* Story */}
           <div className="lg:col-span-7">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-primary">

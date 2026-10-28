@@ -86,7 +86,7 @@ function Hero() {
       <div className="pointer-events-none absolute -right-40 -top-20 -z-10 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-20 -left-40 -z-10 h-96 w-96 rounded-full bg-secondary/10 blur-3xl" />
 
-      <div className="grid items-center gap-14 px-6 py-24 md:grid-cols-2 md:py-32">
+      <div className="grid items-center gap-14 px-6 py-20 md:grid-cols-2 md:py-28">
         {/* Introduction */}
         <div>
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-success/25 bg-success/10 px-4 py-2 text-sm text-success">

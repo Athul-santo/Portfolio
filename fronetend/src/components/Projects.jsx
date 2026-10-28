@@ -151,8 +151,8 @@ function Projects() {
       aria-labelledby="projects-heading"
       className="scroll-mt-20 border-t border-base-content/10 bg-base-100"
     >
-      <div className="px-6 py-20 sm:py-24">
-        <div className="mb-10 max-w-2xl">
+      <div className="px-6 py-14 sm:py-16">
+        <div className="mb-8 max-w-2xl">
           <p className="mb-3 text-sm font-semibold uppercase tracking-[0.25em] text-primary">
             Projects
           </p>
