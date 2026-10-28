@@ -135,7 +135,7 @@ function Hero() {
           {/* Social links */}
           <div className="mt-10 flex gap-6 text-sm text-base-content/60">
             <a
-              href="https://github.com/YOUR_USERNAME"
+              href="https://github.com/Athul-santo/"
               target="_blank"
               rel="noreferrer"
               className="transition hover:text-primary"

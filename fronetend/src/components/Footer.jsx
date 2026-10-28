@@ -50,7 +50,7 @@ function Footer() {
             </p>
 
             <div className="flex flex-wrap items-center gap-2.5">
-              <SocialLink href="https://github.com/YOUR_USERNAME" label="GitHub">
+              <SocialLink href="https://github.com/Athul-santo/" label="GitHub">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 24 24"
