@@ -21,6 +21,10 @@ function Footer() {
           <p className="mt-2 text-sm leading-6 text-base-content/50">
             Building useful things for the web.
           </p>
+
+          <p className="mt-4 border-l-2 border-primary/40 pl-3 text-xs italic leading-6 text-base-content/45">
+            “With great power comes great responsibility.”
+          </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-xs text-base-content/40">

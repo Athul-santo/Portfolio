@@ -82,19 +82,106 @@ html {
   scroll-behavior: smooth;
 }
 
-@keyframes snake {
-  0%,
-  100% {
-    transform: translateY(0);
+@keyframes loader-letter {
+  from {
+    opacity: 0;
+    transform: translateY(0.55em);
+    filter: blur(5px);
   }
-  50% {
-    transform: translateY(-12px);
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
   }
 }
 
-.snake {
-  display: inline-block;
-  animation: snake 1.4s ease-in-out infinite;
+.loader-letter {
+  animation: loader-letter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes loader-fade {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.loader-fade {
+  animation: loader-fade 0.6s ease-out both;
+}
+
+.loader-grid {
+  background-image:
+    linear-gradient(to right, currentColor 1px, transparent 1px),
+    linear-gradient(to bottom, currentColor 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(
+    ellipse 55% 55% at 50% 50%,
+    #000 15%,
+    transparent 75%
+  );
+  mask-image: radial-gradient(
+    ellipse 55% 55% at 50% 50%,
+    #000 15%,
+    transparent 75%
+  );
+}
+
+@keyframes experience-float {
+  0%,
+  100% {
+    transform: translate3d(0, -50%, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(2rem, -54%, 0) scale(1.08);
+  }
+}
+
+.experience-orb {
+  animation: experience-float 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+.experience-orb-right {
+  animation-duration: 24s;
+  animation-direction: reverse;
+}
+
+@keyframes experience-grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 52px 52px;
+  }
+}
+
+.experience-grid {
+  background-image: radial-gradient(currentColor 1px, transparent 1px);
+  background-size: 26px 26px;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 14%,
+    transparent 36%,
+    transparent 64%,
+    #000 86%,
+    #000 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    #000 0%,
+    #000 14%,
+    transparent 36%,
+    transparent 64%,
+    #000 86%,
+    #000 100%
+  );
+  animation: experience-grid-drift 32s linear infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -102,7 +189,10 @@ html {
     scroll-behavior: auto;
   }
 
-  .snake {
+  .loader-letter,
+  .loader-fade,
+  .experience-orb,
+  .experience-grid {
     animation: none;
   }
 }

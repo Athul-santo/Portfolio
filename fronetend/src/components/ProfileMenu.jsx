@@ -4,6 +4,7 @@ import { EMAIL, RESUME_FILENAME, RESUME_URL } from '../contact'
 
 const quickLinks = [
   { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
   { label: 'Tech stack', href: '#tech-stack' },
   { label: 'Back to top', href: '#home' },
 ]

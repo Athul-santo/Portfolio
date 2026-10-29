@@ -1,26 +1,11 @@
 import profileImage from '../assets/profile.jpg'
 
-const focusAreas = [
-  {
-    title: 'Frontend',
-    tools: 'React · Tailwind CSS',
-    description: 'Responsive interfaces that feel right on every screen.',
-  },
-  {
-    title: 'Backend',
-    tools: 'Node.js · Express',
-    description: 'APIs and server-side logic that hold everything together.',
-  },
-  {
-    title: 'Data',
-    tools: 'MySQL · PostgreSQL · MongoDB',
-    description: 'Clean, structured data and the queries that make it useful.',
-  },
-]
-
 const facts = [
   { label: 'education', value: 'BCA' },
-  { label: 'experience', value: 'Internship at Aionpixel Technologies' },
+  {
+    label: 'experience',
+    value: '3-month internship at Aionpixel Technologies',
+  },
   { label: 'stack', value: 'MERN stack' },
   { label: 'mindset', value: 'Always learning' },
 ]
@@ -54,11 +39,13 @@ function About() {
               </p>
 
               <p>
-                During my internship at Aionpixel Technologies, I worked on web
-                application modules, REST API integration, database
-                interactions, and frontend-backend communication. This
-                experience helped me understand how real-world applications are
-                developed and maintained.
+                I completed a three-month Full Stack Developer internship at
+                Aionpixel Technologies, where I contributed to a School ERP
+                platform across web and mobile. I worked on exam and assessment
+                modules, REST API integration, database operations, and
+                frontend-backend communication. This experience gave me
+                hands-on exposure to how real-world applications are developed
+                and maintained.
               </p>
 
               <p>
@@ -68,25 +55,6 @@ function About() {
                 to learn new technologies, collaborate with others, and grow as
                 a software developer.
               </p>
-            </div>
-
-            <div className="mt-10 grid gap-4 sm:grid-cols-3">
-              {focusAreas.map((area) => (
-                <div
-                  key={area.title}
-                  className="rounded-xl border border-base-content/10 bg-base-200/50 p-5 transition duration-300 hover:-translate-y-1 hover:border-primary/40 hover:bg-base-200"
-                >
-                  <h3 className="font-semibold text-base-content">{area.title}</h3>
-
-                  <p className="mt-1 font-mono text-xs text-primary">
-                    {area.tools}
-                  </p>
-
-                  <p className="mt-3 text-sm leading-6 text-base-content/70">
-                    {area.description}
-                  </p>
-                </div>
-              ))}
             </div>
           </div>
 
